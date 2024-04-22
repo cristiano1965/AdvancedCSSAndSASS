@@ -1,0 +1,93 @@
+/* prototipo per custom grid with floats 
+<section class="grid-test">
+  <div class="row">
+    <div class="col-1-of-2">Col 1 of 2</div>
+    <div class="col-1-of-2">Col 1 of 2</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-3">Col 1 of 3</div>
+    <div class="col-1-of-3">Col 1 of 3</div>
+    <div class="col-1-of-3">Col 1 of 3</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-3">Col 1 of 3</div>
+    <div class="col-2-of-3">Col 2 of 3</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-2-of-4">Col 2 of 4</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-3-of-4">Col 3 of 4</div>
+  </div>
+</section>
+*/
+
+.row {
+  max-width: $grid_width; //ogni riga sarà al massimo larga quanto il viewport width
+  //background-color: #eee; //avrà sfondo grigio
+  margin: 0 auto; //margini top/bottom: 0 e sin/dx = ampiezza del viewport - spazio occupato dal div con pari spaziatura a sx e dx
+
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical; //margine basso (se non è l'ultima riga)
+  }
+
+  @include clearfix;
+
+  // [class] selettore di attributo: seleziona tutte le CLASSI e poi specifichiamo il criterio di selezione
+  // ^ seleziona ciò che INIZIA con la stringa
+  // * seleziona ciò che CONTIENE la stringa
+  // $ seleziona ciò che FINISCE con la stringa
+  [class^="col-"] {
+    //background-color: orangered;
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+
+  .col-1-of-2 {
+    width: calc(
+      (100% - #{$gutter-horizontal}) / 2
+    ); // sono due colonne: da tutta ampiezza della riga togliamo un gutter (quello a dx del primo elemento) e dividiamo per 2
+  }
+
+  .col-1-of-3 {
+    width: calc(
+      (100% - 2 * #{$gutter-horizontal}) / 3
+    ); // sono 3 colonne: togliamo 2 gutter e dividiamo per 3
+  }
+
+  .col-2-of-3 {
+    width: calc(
+      2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal}
+    ); // sono 3 colonne di cui due insieme senza gutter: calcoliamo due colonne di tipo col-1-of-3 ed agigungiamo 1 gutter
+  }
+
+  .col-1-of-4 {
+    width: calc(
+      (100% - 3 * #{$gutter-horizontal}) / 4
+    ); // sono 3 colonne: togliamo 3 gutter e dividiamo per 4
+  }
+
+  .col-2-of-4 {
+    width: calc(
+      (2 * (100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal}
+    ); // sono 3 colonne: le prime due sono  col-1-of-4  e l'ultima è pari a 2 * col_1_of_4 + gutter
+  }
+
+  .col-3-of-4 {
+    width: calc(
+      (3 * (100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal}
+    ); // sono 2 colonne: la prima é col-1-of-4  e la seconda è 3 * col_1_4 + 2 * gutter
+  }
+}

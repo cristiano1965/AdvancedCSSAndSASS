@@ -1,0 +1,13 @@
+/* reset di tutti i default del browser*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /* forza per tutti gli elementi il box-sizing con valori ereditati */
+}
+
+html {
+  // this defines the size of 1rem
+  font-size: 62.5%; /* i nostri 10px / i px di default del browser 16px = 0.625 -> 62.5%; */
+}

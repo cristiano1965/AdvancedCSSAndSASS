@@ -1,0 +1,359 @@
+@charset "UTF-8";
+@keyframes moveInBottom {
+  /* all'inizio dell'animazione*/
+  0% {
+    opacity: 0;
+    /* 0=invisibile*/
+    transform: translateY(3rem);
+    /* parti da +100px rispetto alla posizione X attuale */ }
+  /* alla fine dell'animazione*/
+  100% {
+    opacity: 1;
+    /* 1=completamente visibile*/
+    transform: translate(0);
+    /* arriva a 0 pixel rispetto alla posizione attuale, cioè arriva alla attuale posizione finale*/ } }
+
+@keyframes moveInLeft {
+  /* all'inizio dell'animazione*/
+  0% {
+    opacity: 0;
+    /* 0=invisibile*/
+    transform: translateX(-10rem);
+    /* parti da -100px rispetto alla posizione X attuale */ }
+  /* all'80% dell'animazione*/
+  80% {
+    transform: translateX(1rem);
+    /* all'80% dell'animazione spostati a 10px ancora più più a destra */ }
+  /* alla fine dell'animazione*/
+  100% {
+    opacity: 1;
+    /* 1=completamente visibile*/
+    transform: translate(0);
+    /* arriva a 0 pixel rispetto alla posizione attuale, cioè arriva alla attuale posizione finale*/ } }
+
+@keyframes moveInRight {
+  /* all'inizio dell'animazione*/
+  0% {
+    opacity: 0;
+    /* 0=invisibile*/
+    transform: translateX(10rem);
+    /* parti da +100px rispetto alla posizione X attuale */ }
+  /* all'80% dell'animazione*/
+  80% {
+    transform: translateX(-1rem);
+    /* all'80% dell'animazione spostati a -10px ancora più a sinistra */ }
+  /* alla fine dell'animazione*/
+  100% {
+    opacity: 1;
+    /* 1=completamente visibile*/
+    transform: translate(0);
+    /* arriva a 0 pixel rispetto alla posizione attuale, cioè arriva alla attuale posizione finale*/ } }
+
+/* reset di tutti i default del browser*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  /* forza per tutti gli elementi il box-sizing con valori ereditati */ }
+
+html {
+  font-size: 62.5%;
+  /* i nostri 10px / i px di default del browser 16px = 0.625 -> 62.5%; */ }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  /* lscia una cornice bianca tutto intorno al body*/
+  box-sizing: border-box;
+  /* resetta i bordi e padding aggiunti dal browser ai box definiti nel body */ }
+
+.u-center-text {
+  text-align: center; }
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem; }
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem; }
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem; }
+
+.header {
+  height: 95vh;
+  /* 95% del viewport height, cioè dell'altezza della finestra del browser (lascia un 5% di spazio in basso) */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  /* path dell'immagine relativo all'attuale posizione di styles.css*/
+  background-size: cover;
+  /* si estende per tutta ampiezza della finestra */
+  background-position: center;
+  /* ridimensionando la finestra ritaglia lasciandola sempre centrata*/
+  position: relative;
+  /* definiamo questa classe come punto di inizio per i successivi posizionamenti degli altri elementi che incorpora */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    /*centra tutto il testo all'interno del box */ }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  /* rimuove effetto finale di leggero shift in alto non voluto */
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /* inizia veloce  e rallenta alla fine */ }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out; }
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #7ed56f, #28b485);
+  display: inline-block;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.2s; }
+  .heading-secondary:hover {
+    transform: skewY(2deg) skewX(15deg);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.5); }
+
+.heading-terziary {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
+/* prototipo per custom grid with floats 
+<section class="grid-test">
+  <div class="row">
+    <div class="col-1-of-2">Col 1 of 2</div>
+    <div class="col-1-of-2">Col 1 of 2</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-3">Col 1 of 3</div>
+    <div class="col-1-of-3">Col 1 of 3</div>
+    <div class="col-1-of-3">Col 1 of 3</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-3">Col 1 of 3</div>
+    <div class="col-2-of-3">Col 2 of 3</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-2-of-4">Col 2 of 4</div>
+  </div>
+  <div class="row">
+    <div class="col-1-of-4">Col 1 of 4</div>
+    <div class="col-3-of-4">Col 3 of 4</div>
+  </div>
+</section>
+*/
+.row {
+  max-width: 114rem;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc( (100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc( (100% - 2 * 6rem) / 3); }
+  .row .col-2-of-3 {
+    width: calc( 2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc( (100% - 3 * 6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc( (2 * (100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc( (3 * (100% - 3 * 6rem) / 4) + 2 * 6rem); }
+
+.btn {
+  /* 
+  :link e :visited sono pseudo-classi, cioè sono "stati" del componente (btn che è un link)a cui possiamo attribuire uno stile
+  stato iniziale (:link) e già cliccato (:visited) applica lo stesso styling 
+  */
+  /* quando ci vado sopra con il mouse spostalo in alto di 3px rispetto alla posizione iniziale (&:link) */
+  /* quando ci clicco spostalo in alto di 1px, sempre rispetto alla sua posizione iniziale (&:link) */
+  /* definiamo un pulsante nascosto sotto il pulsante originale (z-index: -1)
+   che ha caratteristiche e posizione identica al pulsante originale 
+   ma che viene mostrato solo quando facciamo hover di questo elemento nascosto (con btn:hover::after) */ }
+  .btn:link, .btn:visited {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    /* rimuove la sottilineatura di default del link */
+    padding: 1.5rem 4rem;
+    /* 15top e bottom, 40 left and right*/
+    display: inline-block;
+    /* lo trasforma in un inline-block (con block occuperebbe tutto lo spazio del div!!), altrimenti i padding non funzionano */
+    border-radius: 10rem;
+    transition: all 0.2s;
+    /* specifica quali animazioni usiamo: tutte (tra cui la transform per hover e active) e quanto durano (0.2 secondi) */
+    position: relative;
+    /* definisce il riferimento di origine per il btn::after */ }
+  .btn:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    /* ombra 10px in basso blur:20px nera ma opaca al 50% */
+    /*  quando ci andiamo sopra in 0.4 secondi il pulsante nascosto si mostra, aumentando le prorpie dimensioni come sotto ed alla fine si nasconde di nuovo */ }
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
+  .btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    /* ombra 5px in basso blur:20px nera ma opaca al 50% */ }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #fff;
+      /* stesso colore del bottone originale */ }
+  .btn::after {
+    content: "";
+    /* questo è necessario altrimenti l'elemento non apparirà*/
+    display: inline-block;
+    /* deve essere lo stesso del bottone */
+    height: 100%;
+    /* le dimensioni sono il 100% di quelle del bottone originale */
+    width: 100%;
+    border-radius: 10rem;
+    /* stesso del bottone originale */
+    position: absolute;
+    /* posizionamento assoluto rispetto all'origine relative che si trova nel button */
+    top: 0;
+    /*  0 per top e left = stessa posizione del bottone*/
+    left: 0;
+    z-index: -1;
+    /* lo sposta sotto il btn difatto nascondendolo !! */
+    transition: all 0.4s;
+    /* le transizioni che useremo: tutte e durano 0.4 secondi */ }
+
+.btn-text:link, .btn-text:visited {
+  color: #55c57a;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid #55c57a;
+  padding: 3px;
+  font-size: 1.6rem;
+  transform: all 0.2s; }
+
+.btn-text:hover {
+  background-color: #55c57a;
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px); }
+
+.btn-text:active {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  transform: translateY(0); }
+
+.composition {
+  position: relative; }
+  .composition__photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+    position: absolute;
+    z-index: 10;
+    transform: all 0.2s;
+    outline-offset: 2rem; }
+    .composition__photo--p1 {
+      left: 0;
+      top: -2rem; }
+    .composition__photo--p2 {
+      right: 0;
+      top: 2rem; }
+    .composition__photo--p3 {
+      left: 20%;
+      top: 10rem; }
+    .composition__photo:hover {
+      outline: 1.5rem solid #55c57a;
+      transform: scale(1.05) translateY(-0.5rem);
+      box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+      z-index: 20; }
+  .composition:hover .composition__photo:not(:hover) {
+    transform: scale(0.95); }
+
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s; }
+  .feature-box__icon {
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+    background-image: linear-gradient(to right, #7ed56f, #28b485);
+    display: inline-block;
+    -webkit-background-clip: text;
+    color: transparent; }
+  .feature-box:hover {
+    transform: translateY(-1.5rem) scale(1.03); }
+
+.section-about {
+  background-color: #f7f7f7;
+  padding: 25rem 0;
+  margin-top: -20vh; }
+
+.section-features {
+  margin-top: -10rem;
+  padding: 20rem 0;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../../img/nat-4.jpg);
+  /* path dell'immagine relativo all'attuale posizione di styles.css*/
+  background-size: cover;
+  /* si estende per tutta ampiezza della finestra */
+  background-position: center;
+  /* ridimensionando la finestra ritaglia lasciandola sempre centrata*/
+  transform: skewY(-7deg); }
+  .section-features > * {
+    transform: skewY(7deg); }

@@ -1,0 +1,99 @@
+.header {
+  height: 95vh; /* 95% del viewport height, cioè dell'altezza della finestra del browser (lascia un 5% di spazio in basso) */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg); /* path dell'immagine relativo all'attuale posizione di styles.css*/
+  background-size: cover; /* si estende per tutta ampiezza della finestra */
+  background-position: center; /* ridimensionando la finestra ritaglia lasciandola sempre centrata*/
+
+  position: relative; /* definiamo questa classe come punto di inizio per i successivi posizionamenti degli altri elementi che incorpora */
+
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; /*centra tutto il testo all'interno del box */
+  }
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+
+  backface-visibility: hidden; /* rimuove effetto finale di leggero shift in alto non voluto */
+
+  margin-bottom: 6rem;
+
+  &--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out; /* inizia veloce  e rallenta alla fine */
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out;
+  }
+}
+
+//la scritta è fatta con un  gradiente che inizia verde chiaro a sinistra e termine con verde scuro a destra
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  display: inline-block; //cod+ il div occupa solo lo spazio della scritta e non tutta il blocco del div
+  //ora impostiamo il background a gradiente SOLO all'interno del testo e non come suo sfondo
+  -webkit-background-clip: text;
+  //e poi impostiamo il testo trasparente in modo che lo sfondo a gradiente si veda nel text
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.2s; //gli effetti di transizione che applicheremo durano .2secondi
+
+  // in hover applichiamo un effetto
+  &:hover {
+    transform: skewY(2deg) skewX(15deg); //applica una distorsione all'asse Y di 2gradi ed all'asse X di 15 gradi
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.5); //applichiamo un'ombra con blur scura al 50%
+  }
+}
+
+.heading-terziary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

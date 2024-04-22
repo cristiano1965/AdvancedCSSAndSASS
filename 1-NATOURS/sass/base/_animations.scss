@@ -1,0 +1,66 @@
+@keyframes moveInBottom {
+  /* all'inizio dell'animazione*/
+  0% {
+    opacity: 0; /* 0=invisibile*/
+    transform: translateY(
+      3rem
+    ); /* parti da +100px rispetto alla posizione X attuale */
+  }
+  /* alla fine dell'animazione*/
+  100% {
+    opacity: 1; /* 1=completamente visibile*/
+    transform: translate(
+      0
+    ); /* arriva a 0 pixel rispetto alla posizione attuale, cioè arriva alla attuale posizione finale*/
+  }
+}
+
+@keyframes moveInLeft {
+  /* all'inizio dell'animazione*/
+  0% {
+    opacity: 0; /* 0=invisibile*/
+    transform: translateX(
+      -10rem
+    ); /* parti da -100px rispetto alla posizione X attuale */
+  }
+
+  /* all'80% dell'animazione*/
+  80% {
+    transform: translateX(
+      1rem
+    ); /* all'80% dell'animazione spostati a 10px ancora più più a destra */
+  }
+
+  /* alla fine dell'animazione*/
+  100% {
+    opacity: 1; /* 1=completamente visibile*/
+    transform: translate(
+      0
+    ); /* arriva a 0 pixel rispetto alla posizione attuale, cioè arriva alla attuale posizione finale*/
+  }
+}
+
+@keyframes moveInRight {
+  /* all'inizio dell'animazione*/
+  0% {
+    opacity: 0; /* 0=invisibile*/
+    transform: translateX(
+      10rem
+    ); /* parti da +100px rispetto alla posizione X attuale */
+  }
+
+  /* all'80% dell'animazione*/
+  80% {
+    transform: translateX(
+      -1rem
+    ); /* all'80% dell'animazione spostati a -10px ancora più a sinistra */
+  }
+
+  /* alla fine dell'animazione*/
+  100% {
+    opacity: 1; /* 1=completamente visibile*/
+    transform: translate(
+      0
+    ); /* arriva a 0 pixel rispetto alla posizione attuale, cioè arriva alla attuale posizione finale*/
+  }
+}

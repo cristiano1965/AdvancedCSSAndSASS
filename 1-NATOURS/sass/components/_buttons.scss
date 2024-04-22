@@ -1,0 +1,85 @@
+.btn {
+  /* 
+  :link e :visited sono pseudo-classi, cioè sono "stati" del componente (btn che è un link)a cui possiamo attribuire uno stile
+  stato iniziale (:link) e già cliccato (:visited) applica lo stesso styling 
+  */
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    text-transform: uppercase;
+    text-decoration: none; /* rimuove la sottilineatura di default del link */
+    padding: 1.5rem 4rem; /* 15top e bottom, 40 left and right*/
+    display: inline-block; /* lo trasforma in un inline-block (con block occuperebbe tutto lo spazio del div!!), altrimenti i padding non funzionano */
+    border-radius: 10rem;
+    transition: all 0.2s; /* specifica quali animazioni usiamo: tutte (tra cui la transform per hover e active) e quanto durano (0.2 secondi) */
+    position: relative; /* definisce il riferimento di origine per il btn::after */
+  }
+
+  /* quando ci vado sopra con il mouse spostalo in alto di 3px rispetto alla posizione iniziale (&:link) */
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.5); /* ombra 10px in basso blur:20px nera ma opaca al 50% */
+
+    /*  quando ci andiamo sopra in 0.4 secondi il pulsante nascosto si mostra, aumentando le prorpie dimensioni come sotto ed alla fine si nasconde di nuovo */
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  /* quando ci clicco spostalo in alto di 1px, sempre rispetto alla sua posizione iniziale (&:link) */
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.5); /* ombra 5px in basso blur:20px nera ma opaca al 50% */
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey;
+
+    &::after {
+      background-color: $color-white; /* stesso colore del bottone originale */
+    }
+  }
+
+  /* definiamo un pulsante nascosto sotto il pulsante originale (z-index: -1)
+   che ha caratteristiche e posizione identica al pulsante originale 
+   ma che viene mostrato solo quando facciamo hover di questo elemento nascosto (con btn:hover::after) */
+  &::after {
+    content: ""; /* questo è necessario altrimenti l'elemento non apparirà*/
+    display: inline-block; /* deve essere lo stesso del bottone */
+    height: 100%; /* le dimensioni sono il 100% di quelle del bottone originale */
+    width: 100%;
+    border-radius: 10rem; /* stesso del bottone originale */
+    position: absolute; /* posizionamento assoluto rispetto all'origine relative che si trova nel button */
+    top: 0; /*  0 per top e left = stessa posizione del bottone*/
+    left: 0;
+    z-index: -1; /* lo sposta sotto il btn difatto nascondendolo !! */
+    transition: all 0.4s; /* le transizioni che useremo: tutte e durano 0.4 secondi */
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    font-size: $default-font-size;
+    transform: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.5);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.5);
+    transform: translateY(0);
+  }
+}

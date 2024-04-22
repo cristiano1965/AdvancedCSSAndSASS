@@ -1,0 +1,9 @@
+// questa serve per ripristinare altezza dell'elemento quando usiamo un FLOAT
+
+@mixin clearfix {
+  &::after {
+    content: ""; //non vogliamo vedere questo ele,ento sulla pagina
+    display: table;
+    clear: both; // pulisce float left e right
+  }
+}
