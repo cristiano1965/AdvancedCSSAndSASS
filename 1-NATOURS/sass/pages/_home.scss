@@ -12,18 +12,30 @@
       rgba($color-primary-light, 0.8),
       rgba($color-primary-dark, 0.8)
     ),
-    url(../../img/nat-4.jpg); /* path dell'immagine relativo all'attuale posizione di styles.css*/
+    url(../img/nat-4.jpg); /* path dell'immagine relativo all'attuale posizione di styles.css*/
   background-size: cover; /* si estende per tutta ampiezza della finestra */
   background-position: center; /* ridimensionando la finestra ritaglia lasciandola sempre centrata*/
 
   transform: skewY(
-    -7deg
-  ); //così l'immagine di sfondo ha la stessa inclinazione di quella dell'header (ma anche i boxes, che li rigiriamo poi a +7deg con selettore sotto indicato)
+    -6deg
+  ); //così l'immagine di sfondo ha la stessa inclinazione di quella dell'header (ma anche i boxes, che li rigiriamo poi a +6deg con selettore sotto indicato)
 
   // prendiamo solo il primo direct child di section-features (in questo caso è uno solo, cioè la row) e solo su quello facciamo lo skew al contrario
-  // per compensare lo skew -7 del section-features !!!
+  // per compensare lo skew -6 del section-features !!!
   // se avessimo scritto & * (cioè senza il ">" avrebbe preso tutti i children e non andava bene perchè avremmo avuto lo skew su tutto !!!
   & > * {
-    transform: skewY(7deg);
+    transform: skewY(6deg);
   }
+}
+
+.section-tours {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0 15rem 0;
+  margin-top: -10rem; //attacchiamo questa sezione alla precedente
+}
+
+.section-stories {
+  /* background-color: $color-grey-light-1; */
+  padding: 15rem 0;
+  position: relative;
 }

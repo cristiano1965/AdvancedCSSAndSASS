@@ -11,6 +11,7 @@
 
   position: relative; /* definiamo questa classe come punto di inizio per i successivi posizionamenti degli altri elementi che incorpora */
 
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
   &__logo-box {
@@ -73,6 +74,7 @@
   display: inline-block; //cod+ il div occupa solo lo spazio della scritta e non tutta il blocco del div
   //ora impostiamo il background a gradiente SOLO all'interno del testo e non come suo sfondo
   -webkit-background-clip: text;
+  background-clip: text;
   //e poi impostiamo il testo trasparente in modo che lo sfondo a gradiente si veda nel text
   color: transparent;
   letter-spacing: 0.2rem;

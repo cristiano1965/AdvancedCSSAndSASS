@@ -19,6 +19,7 @@
     display: inline-block; // il div occupa solo lo spazio della scritta e non tutta il blocco del div
     //ora impostiamo il background a gradiente SOLO all'interno del testo e non come suo sfondo
     -webkit-background-clip: text;
+    background-clip: text;
     //e poi impostiamo il testo trasparente in modo che lo sfondo a gradiente si veda nel text
     color: transparent;
   }

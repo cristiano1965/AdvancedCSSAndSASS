@@ -1,0 +1,69 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.5);
+  background-color: rgba($color-white, 0.1);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg); //distorce di 12gradi su l'asse X tutto il DIV
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    /* background-color: orangered; */
+    // lo shape-outside funziona solo se trova, float, width e height e ci deve essere anche il -webkit
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(
+      50% at 50% 50%
+    ); //raggio al 50% dell'altezza del DIV con il centro del cerchio al 50% su asse X e 50% su asse Y
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg); //compensa lo skew per l'immagine
+    position: relative;
+  }
+
+  &__img {
+    height: 100%; //ridimensiona immagine in modo che entri tutta nello shape
+    transform: translateX(-4rem)
+      //la centra nel cerchio (altrimenti è spostata troppo a destra sull'asse X)
+      scale(1.4); // la ZOOMMA più grande del normale (poi l'hover sulla story la riporta a ZOOM normale)
+    backface-visibility: hidden; //sistema storture che si hanno quando si hanno effetti di transform
+    transition: all 0.5s;
+  }
+
+  &__text {
+    transform: skewX(12deg); //compensa lo skew per il testo
+  }
+
+  // posizione iniziale della caption dell'immagine: non visibile ed in basso +20% su asse Y; diventa poi visibile e si sposta dal 20%Y al -50%Y con gli effetti che si scatenano andando in hover sulla story
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%); //al centro ma più in basso sull'asse Y
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden; //fissa il piccolo glitch che si crea all'inizio della transizione
+  }
+
+  // quando andiamo in hover su story seleziona story__caption ed applica effetti su questo (rendi visibile e sposta il caption)
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  // quando andiamo in hover su story seleziona story__img ed applica effetti su questo (zoom out e sfoca e scurisce de)
+  &:hover &__img {
+    transform: translateX(-4rem)
+      //la centra nel cerchio (altrimenti è spostata troppo a destra sull'asse X)
+      scale(1); // la riporta a ZOOM normale
+    filter: blur(3px) brightness(80%); // sfoca e scurisce
+  }
+}
