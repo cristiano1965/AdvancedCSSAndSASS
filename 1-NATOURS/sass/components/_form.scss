@@ -1,0 +1,124 @@
+.form {
+  &__input {
+    font-size: 1.5rem;
+    font-family: inherit; // importa "Lato"
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+
+    // quando il campo di input si attiva....
+    &:focus {
+      outline: none; // rimuove il bordo blu del campo di input quando selezionato
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    // se input non valido diventa arancione (altrimenti se valido è verde, quello del :focus)
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+  }
+
+  // se non è ultimo campo di input aggungi un margine tra questo campo di input ed il successivo
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  // attributi della label
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  // quando visualizzi il placeholder del campo di input seleziona il sibling adiacente con "+"
+  //  (funziona solo se tra input e label non c'è altro altrimenti dovevamo usare il sibling generale, cioè la tilde "~" al posto del "+")
+  // <input ......
+  // <label...
+  // e nascondilo (impostiamo sia visibility sia opacity sia posizione verticaleY -4  perchè poi con il trasition all su &__label si anima automaticamente l'opacity che va a 1 ed anche la positione verticaleY va a 0  quando il campo di input diventa active)
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  // i radio buttons li mettiamo uno vicino all'altro in un inline-block (attenzione alla width: se > 49% li mette uno sotto all'atro!!!)
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+    position: relative; //per consentire position: absolute sul radio-input nascosto
+  }
+
+  // input radio non è visibile (opacity=0 anzichè display: none) perchè lo sostituiamo con lo span sulla label
+  // (ma continua a funzionare perchè ancora esiste !!!!), solo lo spostiamo al centro tra i due radio button in modo che errore di validazione (required su uno dei due vuol dire che una selezione deve essere fatta!!) sia visibile
+  &__radio-input {
+    opacity: 0;
+    position: absolute;
+    right: 4%;
+    bottom: 0;
+  }
+
+  // il radio button è required, quindi se non ho selezionato nessuno dei due, i cerchietti sono rossi (ridiventano verdi quando seleziono uno dei due)
+  &__radio-input:invalid ~ &__radio-label &__radio-button {
+    border: 5px solid $color-secondary-dark;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  // questo è il radio button: un cerchietto verde con il centro vuoto
+  // al cui interno metteremo quello pieno quando il radio button viene cliccato (&__radio-button:after)
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+
+    // questo è il cerchietto verde all'interno del radio button che si riempie quando il radio button viene cliccato
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      @include absCenter;
+      background-color: $color-primary;
+      opacity: 0; // all'inizio è invisibile
+      transform: opacity 0.2s;
+    }
+  }
+
+  // quando clicco la label di un radio button questo diventa checked a quel punto prende il sibling radio-label (con ~)
+  // e di questo prendo il radio-button con il cerchietto interno (quello con ::after)
+  // e gli mette opacità ad 1 (quindi rende di fatto il cerchietto interno visibile !!!)
+  /*
+                 <input  id="large" type="radio" class="form__radio-input" name="tour-size">
+     ~ sibling  --->  <label for="large" class="form__radio-label">
+        questo ---->    <span class="form__radio-button"></span>
+  
+  */
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

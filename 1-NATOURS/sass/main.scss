@@ -9,6 +9,8 @@
 
 @import "layout/header";
 @import "layout/grid";
+@import "layout/footer";
+@import "layout/navigation";
 
 @import "components/buttons";
 @import "components/composition.scss";
@@ -16,5 +18,7 @@
 @import "components/card";
 @import "components/story";
 @import "components/bg-video";
+@import "components/form";
+@import "components/popup";
 
 @import "pages/home";

@@ -2,7 +2,10 @@
   /* 
   :link e :visited sono pseudo-classi, cioè sono "stati" del componente (btn che è un link)a cui possiamo attribuire uno stile
   stato iniziale (:link) e già cliccato (:visited) applica lo stesso styling 
+  aggiungiamo anche & (cioè btn) in modo che anche un <button class"btn"> possa essere trattato come un link dal punto di vista 
+  degli attributi da gestire per il button
   */
+  &,
   &:link,
   &:visited {
     font-size: $default-font-size;
@@ -28,7 +31,10 @@
   }
 
   /* quando ci clicco spostalo in alto di 1px, sempre rispetto alla sua posizione iniziale (&:link) */
-  &:active {
+  &:active,
+  &:focus {
+    outline: none; // rimuove il border BLU dal button quando lo clicchiamo
+    //il focus server quando il pulsante è un BUTTON , active serve quando il pulsante è un LINK
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.5); /* ombra 5px in basso blur:20px nera ma opaca al 50% */
   }

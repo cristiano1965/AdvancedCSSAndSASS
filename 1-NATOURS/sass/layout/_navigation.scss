@@ -1,0 +1,179 @@
+.navigation {
+  // il checkbox vero lo nascondiamo (ma continua ancora a funzionare quando lo clicchiamo!!)
+  &__checkbox {
+    display: none;
+  }
+
+  // questa è la label del checkbox che viene stilizzata come un cerchio bianco fisso in alto a destra che si sovrappone e copre quello verde
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.3);
+    text-align: center; //questo centra le tree lineette dell'hamburger menu
+    cursor: pointer;
+  }
+
+  // cerchio verde fisso in alto a destra
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    z-index: 1000;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  // il menu di navigazione occuperà il 100% di altezza ed ampiezza del browser ma inizialmente lo nascondiamo
+  &__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+
+    // inizialmente nascosto
+    opacity: 0;
+    width: 0;
+
+    transition: all 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  // la UL la centriamo nel precedente nav container
+  &__list {
+    @include absCenter;
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    // normal state del link
+    &:link,
+    &:visited {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      // con angolo di  120g colora da 0 al 50% con colore trasparente, poi sfuma fino al bianco (in orizzontale)
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      background-size: 220%; // con questo a duecento20% ed il background position a zero il bianco sparisce
+      background-position: 0;
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    // quando ci vado sopra il bianco ricompare da sinistra a destra e la posizione shifta a destra di 1rem
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  // cliccando sulla label del checkbox
+  &__checkbox:checked ~ &__background {
+    // ingigantiamo il cerchio verde di 80 volte, così da coprire tutta la window del browser
+    transform: scale(80);
+  }
+
+  // cliccando sulla label del checkbox
+  &__checkbox:checked ~ &__nav {
+    // mostriamo il menu nav
+    opacity: 1;
+    width: 100%;
+  }
+
+  // ICON
+  &__icon {
+    // questo è lo span con la lineetta centrale
+    position: relative;
+    margin-top: 3.5rem;
+
+    // tutte e 3 le lineette dell'amburger menu
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    // la  lineetta superiore e quella inferiore dell'amburger menu
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    // spaziatura della linea superiore
+    &::before {
+      top: -0.8rem;
+    }
+    // spaziatura della linea inferiore
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  // quando andiamo sul button la lineettaa in alto si sposta più in alto
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  // quando andiamo sul button la lineettaa in basso si sposta più in basso
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  // quando clicchiamo sul checkbox selezionamo il suo primo sibling button e poi icon
+  // e facciamo sparire lo span centrale semplicemente impostando il suo background color a transparent
+  // non possiamo nasconderlo nè fare altro perchè ci sono i suoi due ::before e ::after che dipendono da lui !!
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+  }
+
+  // la lineetta in alto ruota di 3/4 di cerchio e si sposta al centro
+  &__checkbox:checked + &__button &__icon::before {
+    transform: rotate(135deg);
+    top: 0;
+  }
+
+  // la lineetta in basso ruota di -3/4 di cerchio e si sposta al centro
+  &__checkbox:checked + &__button &__icon::after {
+    transform: rotate(-135deg);
+    top: 0;
+  }
+}

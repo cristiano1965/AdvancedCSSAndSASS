@@ -1,0 +1,96 @@
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color-black, 0.8);
+  z-index: 9999;
+  // quando carica la pagina questa sezione non è visibile (lo sarà quando cliccheremo sui pulsanti che si trovano sul back delle cards rotanti in section-tours
+  opacity: 0;
+  visibility: hidden;
+  transform: all 0.3s;
+
+  // questo pulsante punta al target "#section-tours" per cui quando premuto il popup perde il suo target attuale e quindi ritorna al suo status originale, che ha opacity:0 e visibility:hidden
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      line-height: 1rem;
+    }
+
+    // su hover la X diventa verde
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__content {
+    @include absCenter; //posiziona al centro del container padre
+
+    width: 75%;
+    overflow: hidden; //l parte di immagine che eccede il content viene nascosta, così questo contenitore potrà finalmente mostrare il border radius
+    background-color: $color-white;
+    box-shadow: 0 2rem 4rem rgba($color-black, 0.5);
+    border-radius: 3px;
+    display: table; //questo container lo definiamo TABLE per il left e right che saranno le sue table-cell
+    // lo status iniziale del popup è non visibile, al centro del container e molto piccolo, quando verrà reso visibile (mediante &:target &__content più sotto indicato) la sua opacity diverrà 1 e scalerà al 100% della sua size
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: all 0.5s 0.2s; //prima il popup mette lo sfondo scuro e poi dopo .2secondi appare ed i suoi effetti di comparsa (cioè opacity e scale) durano .4secondi
+  }
+
+  &__left {
+    width: 33.333333%;
+    display: table-cell;
+  }
+
+  &__right {
+    width: 66.666667%;
+    display: table-cell;
+    vertical-align: middle; //questa table cell la allineiamo in verticale al centro
+    padding: 3rem 5rem;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+  }
+
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    -moz-column-count: 2;
+    -moz-column-gap: 4rem;
+    -moz-column-rule: 1px solid $color-grey-light-2;
+
+    column-count: 2;
+    column-gap: 4rem; //1em: 14px (cont-size)
+    column-rule: 1px solid $color-grey-light-2; //riga grigia piccola tra le due colonne
+
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto; //imposta il trattino "-" di a capo automatico in base alla lingua della pagina html (specificata all'inizio in <html lang="en">
+  }
+
+  // quando arriviamo su questo target (la section popup ha un id="popup") ripristina la visualizzazione del popup
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // quando diventa target seleziona il contenuto della popup e riscalalo a 100% delal sua ampiezza e rendilo visibile
+  &:target &__content {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
