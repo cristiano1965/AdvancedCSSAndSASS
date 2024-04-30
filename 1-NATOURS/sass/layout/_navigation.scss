@@ -17,6 +17,18 @@
     box-shadow: 0 1rem 3rem rgba($color-black, 0.3);
     text-align: center; //questo centra le tree lineette dell'hamburger menu
     cursor: pointer;
+
+    // fino a 900px spostiamo un pò più in alto hamburger menu
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    // fino a 600px spostiamo un pò più in alto hamburger menu
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
   }
 
   // cerchio verde fisso in alto a destra
@@ -33,6 +45,18 @@
     );
     z-index: 1000;
     transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+
+    // fino a 900px spostiamo un pò più in alto hamburger menu
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    // fino a 600px spostiamo un pò più in alto hamburger menu
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
   }
 
   // il menu di navigazione occuperà il 100% di altezza ed ampiezza del browser ma inizialmente lo nascondiamo

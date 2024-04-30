@@ -33,11 +33,22 @@
 
 .row {
   max-width: $grid_width; //ogni riga sarà al massimo larga quanto il viewport width
-  //background-color: #eee; //avrà sfondo grigio
+  background-color: inherit; //avrà sfondo grigio
   margin: 0 auto; //margini top/bottom: 0 e sin/dx = ampiezza del viewport - spazio occupato dal div con pari spaziatura a sx e dx
 
   &:not(:last-child) {
     margin-bottom: $gutter-vertical; //margine basso (se non è l'ultima riga)
+
+    //fino a 900px il margine basso lo riduciamo a 6rem
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  //fino a 900px l'ampiezza del box non deve occupare il 100% della colonna
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 3rem;
   }
 
   @include clearfix;
@@ -52,6 +63,17 @@
 
     &:not(:last-child) {
       margin-right: $gutter-horizontal;
+
+      //fino a 900px il margine a destra lo rimuoviamo perchè su una unica colonna non serve più ma aggiungiamo un piccolo margin-bottom
+      @include respond(tab-port) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+
+    //fino a 900px le colonne devono diventare una sola
+    @include respond(tab-port) {
+      width: 100% !important;
     }
   }
 

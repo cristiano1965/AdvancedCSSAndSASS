@@ -4,7 +4,12 @@ body {
   /* font-size: 16px; */
   line-height: 1.7;
   color: $color-grey;
-  padding: 3rem; /* lscia una cornice bianca tutto intorno al body*/
+  padding: 3rem; /* lascia una cornice bianca tutto intorno al body */
 
   box-sizing: border-box; /* resetta i bordi e padding aggiunti dal browser ai box definiti nel body */
+
+  // fino a 900px la cornice bianca  intorno al body non deve comparire
+  @include respond(tab-port) {
+    padding: 0;
+  }
 }

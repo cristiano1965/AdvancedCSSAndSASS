@@ -5,7 +5,7 @@
       rgba($color-primary-light, 0.8),
       rgba($color-primary-dark, 0.8)
     ),
-    url(../img/hero.jpg); /* path dell'immagine relativo all'attuale posizione di styles.css*/
+    url(../img/hero-small.jpg); /* path dell'immagine relativo all'attuale posizione di styles.css hreo-small: low resolution*/
   background-size: cover; /* si estende per tutta ampiezza della finestra */
   background-position: center; /* ridimensionando la finestra ritaglia lasciandola sempre centrata*/
 
@@ -13,6 +13,24 @@
 
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  // per schermi con risoluzione px più alta (2x) and ampiezza view-port >= 600px
+  // oppure per ampiezza view-port >= 2000px usa immagine a più alta risoluzione
+  @media only screen and (min-resolution: 192dpi) and (min-width: 600px),
+    only screen and(min-width: 2000px) {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url(../img/hero.jpg);
+  }
+
+  // fino a 600px il terzo punto del clip-path lo alziamo un pò in modo che la sua inclinazione sia più naturale
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
 
   &__logo-box {
     position: absolute;
@@ -50,6 +68,12 @@
     animation-name: moveInLeft;
     animation-duration: 1s;
     animation-timing-function: ease-out; /* inizia veloce  e rallenta alla fine */
+
+    // fino a 600px riduciamo font e letter-spacing
+    @include respond(phone) {
+      font-size: 5rem;
+      letter-spacing: 1rem;
+    }
   }
 
   &--sub {
@@ -58,6 +82,11 @@
     font-weight: 700;
     letter-spacing: 1.75rem;
     animation: moveInRight 1s ease-out;
+
+    // fino a 600px riduciamo letter-spacing
+    @include respond(phone) {
+      letter-spacing: 0.5rem;
+    }
   }
 }
 
@@ -79,6 +108,16 @@
   color: transparent;
   letter-spacing: 0.2rem;
   transition: all 0.2s; //gli effetti di transizione che applicheremo durano .2secondi
+
+  // fino a 900px riduciamo font-size
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+
+  // fino a 600px riduciamo font-size
+  @include respond(phone) {
+    font-size: 2.5rem;
+  }
 
   // in hover applichiamo un effetto
   &:hover {
