@@ -1,0 +1,126 @@
+// HEADER
+
+// LOGO
+.logo {
+  height: 3.25rem;
+  margin-left: 2rem;
+}
+
+//SEARCH
+.search {
+  flex: 0 0 40%; //no grow, no shrink, occupa 40% dello spazio del flex
+
+  // facciamo diventare l'item del flexbox un container flex
+  // in modo da centrare sia il campo di input sia la lente al centro in
+  // orizzontale ed in verticale
+  display: flex;
+  justify-content: center; //allineati in orizzontale
+  align-items: center; // verticalmente centrati
+
+  &__input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: var(--color-grey-light-2);
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 100px;
+    width: 90%;
+    transition: all 0.5s;
+    margin-right: -3.25rem;
+
+    // quando attiviamo il cmapo di input diventa più grande
+    &:focus {
+      outline: none;
+      width: 100%;
+      background-color: var(--color-grey-light-3);
+    }
+
+    &::-webkit-input-placeholder {
+      font-weight: 100;
+      color: var(--color-grey-light-4);
+    }
+  }
+
+  // quando attiviamo input anche lente avrà stesso colore dell'input
+  &__input:focus + &__button {
+    background-color: var(--color-grey-light-3);
+  }
+
+  &__button {
+    border: none;
+    background-color: var(--color-grey-light-2);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+
+  &__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-grey-dark-3); //colore della lente di ingradimento
+  }
+}
+
+// USER NAVIGATION
+
+.user-nav {
+  align-self: stretch; // l'item user-nav si allarga in verticale fino a riempire tutte lo spazio del suo flex-container (cioè header)
+
+  // facciamo diventare l'item del flexbox un container flex
+  // in modo da centrare tutti gli elementi contenuto al centro in verticale
+  display: flex;
+  align-items: center; // verticalmente centrati
+
+  //selezioamo tutti i children di user-nav e li stilizziamo...
+  & > * {
+    padding: 0 2rem;
+    cursor: pointer;
+    height: 100%; //occupano tutto lo spazio del container (user-nav)
+    // questo contiene (svg oppure img) e span e lo facciamo diventare un flex per centrarne il contenuto verticalmente
+    display: flex;
+    align-items: center;
+  }
+  //... anche quando andiamo in hover
+  & > *:hover {
+    background-color: var(--color-grey-light-2);
+  }
+
+  &__icon-box {
+    position: relative; //riferimento impostato per il posizionamento della notification
+  }
+
+  &__icon {
+    height: 2.25rem;
+    width: 2.25rem;
+    fill: var(--color-grey-dark-2);
+  }
+
+  // cerchietto rosso con il numero bianco all'interno
+  &__notification {
+    font-size: 0.8rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffff;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.1rem;
+    // centriamo la scritta bianca con in conteggio in orizzontale ed in verticale all'interno del pallino rosso usando nuovamente il flex
+    display: flex;
+    align-items: center; // verticalmente centrati
+    justify-content: center;
+  }
+
+  &__user-photo {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+}

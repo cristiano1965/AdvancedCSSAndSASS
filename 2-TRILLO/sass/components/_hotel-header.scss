@@ -1,0 +1,130 @@
+// sezione HOTEL VIEW
+
+//galleria foto
+.gallery {
+  display: flex;
+
+  /*
+  &__item {
+  }
+  */
+
+  &__photo {
+    display: block;
+    width: 100%;
+  }
+}
+
+// overview con header dell'hotel
+
+.overview {
+  display: flex;
+  align-items: center; //centra in verticale
+  border-bottom: var(--line);
+
+  &__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem;
+  }
+
+  &__stars {
+    margin-right: auto; //crea spazio a destra dell'elemento
+    display: flex;
+  }
+
+  &__location {
+    font-size: 1.2rem;
+    display: flex;
+    vertical-align: center;
+  }
+
+  &__icon-star,
+  &__icon-location {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: var(--color-primary);
+  }
+
+  &__icon-location {
+    margin-right: 0.5rem;
+  }
+
+  &__rating {
+    background-color: var(--color-primary);
+    margin-left: 3rem;
+    color: white;
+    align-self: stretch; //l'elemento occupa tutto lo spazio disponibile
+    padding: 0 2.25rem;
+    // disponiamo i due contatori in verticale e li centriamo in orizzontale ed in verticale
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-average {
+      font-size: 2.25rem;
+      font-weight: 300;
+      margin-bottom: -3px;
+    }
+
+    &-count {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.btn-inline {
+  border: none;
+  color: var(--color-primary);
+  font-size: inherit;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  & span {
+    margin-left: 3px;
+    transition: margin-left 0.2s;
+  }
+
+  &:hover {
+    color: var(--color-grey-dark-1);
+
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  // quando clicco sulla località si attiva il focus che attiva l'animazione (cliccando fuori l'animazione perde il focus e l'animazione si disattiva)
+  &:focus {
+    outline: none;
+    animation: pulsate 1s infinite; // ripete l'animazione keyframes all'infinito
+  }
+}
+
+// effetto batticuore infinitp
+@keyframes pulsate {
+  0% {
+    // a 0% nessuno scale e nessuna shadow
+    transform: scale(1);
+    box-shadow: none;
+  }
+
+  50% {
+    // a 50% un piccolo scale ed una piccola shadow
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
+  }
+
+  100% {
+    // a 100% nessuno scale e nessuna shadow
+    transform: scale(1);
+    box-shadow: none;
+  }
+}

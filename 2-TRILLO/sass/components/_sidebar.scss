@@ -1,0 +1,76 @@
+// SIDE NAVIGATION
+
+// ul
+.side-nav {
+  font-size: 1.4rem;
+  list-style: none;
+  margin-top: 3.5rem;
+
+  // li
+  &__item {
+    position: relative; // ci serve per la posizion absolute di &__item:before
+
+    // aggiungiamo una spaziatura tra gli <li> (tranne ultimo)
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // questa è la linea che poi compare e si allarga a destra quando andiamo in hover su quel <li>
+  &__item:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; // la stessa altezza dell'elemento <li>
+    width: 3px; //all'inizio è largo 3px poi si espande con hover al 100% della width dell'<li>
+    background-color: var(--color-primary);
+    transform: scaleY(0); // stato iniziale: non scalato
+    transform-origin: center; // lo scaleY parte dal centro
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+      background-color 0.1s; //lo scaleY dura .2secondi, il width .4secondi con un ritardo di .2secondi dal transform ed effetto cubic-bezier che inizia piano e poi accelera ed alla fine rallenta ed infine il colore di sfondo diventa più chiaro in .1secondi (solo quando clicchiamo elemento)
+  }
+
+  // quando clicchiamo sul <li> il suo colore ::before diventa più chiato
+  &__item:active::before {
+    background-color: var(--color-primary-light);
+  }
+
+  // quando andiamo su <li> aumentiamo la sua ampiezza fino a coprire tutto il <li> (oppure se l'elemento è quello active)
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1); //scala su asse Y fino al 100% della height del <li>
+    width: 100%; // si allarga fino al 100% della width dell'<li>
+  }
+
+  // a href
+  &__link:link,
+  &__link:visited {
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    position: relative; //serve per lo z-index
+    z-index: 10; // questo rende visibile il testo <li> davanti ::before
+
+    // centriamo verticalmente icona e testo del link facendo di questo ITEM un container FLEX e align-items: center;
+    display: flex;
+    align-items: center;
+  }
+
+  // svg dentro __link
+  &__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    fill: currentColor; // colore dell'elemento corrente (se specificato) o del padre (se non specificato): qui lo prende da &__link
+  }
+}
+
+.legal {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--color-grey-light-4);
+}

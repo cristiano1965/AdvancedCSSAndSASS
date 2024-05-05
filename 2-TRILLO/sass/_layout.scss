@@ -1,0 +1,44 @@
+// questo è il contenitore principale centrale che contiene header (sopra) e content al centro che a sua volta contiene
+// sidebar e hotel-view affiancati (in una singola riga)
+.container {
+  max-width: 120rem; //occupa solo 1200px della viewport width;
+  margin: 8rem auto; // centrato
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
+
+  min-height: 50rem; // occupa solo 50rem della viewport height
+}
+
+// contenitore del logo, search e user nav
+.header {
+  font-size: 1.4rem;
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: var(--line);
+
+  display: flex;
+  justify-content: space-between; //allineati in orizzontale
+  align-items: center; // verticalmente centrati
+}
+
+// questo è il flex container che contiene la sidebar laterale(18% della riga) e la hotel-view centrale (82% della riga)
+.content {
+  display: flex;
+}
+
+.sidebar {
+  background-color: var(--color-grey-dark-1);
+  flex: 0 0 18%; // no grow, no shrink, width: 18% (cioè occupa solo il 18% dello spazio del suo "content")
+
+  // la sidebar è un flex in colonna anzichè in riga e quindi ora l'asse X è in verticale (e l'asse Y in orizzontale) e quindi il justify-content lo possiamo usare per allineare gli elementi in verticale
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; //divide tutto lo spazio disponibile tra i due items (il div side-nav con UL/LI sopra ed il div legal sotto
+}
+
+.hotel-view {
+  flex: 1; // cresci più che puoi occupando tutto lo spazio della row (occuperà la restante parte del suo "content", cioè il rimanente 82%  : 18+82=100%)
+
+  // test
+  //height: 80rem;
+}
