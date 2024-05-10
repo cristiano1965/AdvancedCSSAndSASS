@@ -7,6 +7,16 @@
   background-color: var(--color-grey-light-1);
   border-bottom: var(--line);
   font-size: 1.4rem;
+
+  // fino a 880px diminuisci padding
+  @media only screen and (max-width: $bp-medium) {
+    padding: 3rem;
+  }
+
+  // fino a 717 mettiamo i due box description e user_review uno sotto l'altro
+  @media only screen and (max-width: $bp-small) {
+    flex-direction: column;
+  }
 }
 
 .description {
@@ -15,6 +25,18 @@
   flex: 0 0 60%; //non crescere, non shrinkare ed occupa 60% dello spazio
   margin-right: 4.5rem;
   padding: 3rem;
+
+  // fino a 880px diminuisci padding e margine
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2rem;
+    margin-right: 3rem;
+  }
+
+  // fino a 717 rimuovi il margine destro ed aumenta quello bottom
+  @media only screen and (max-width: $bp-small) {
+    margin-right: 0;
+    margin-bottom: 3rem;
+  }
 }
 
 // margin bottom su tutti i paragrafi ma non su l'ultimo di questo tipo
@@ -47,15 +69,18 @@
     margin-right: 0.7rem;
 
     // older browsers (non possiamo specificare il colore!!)
-    // background-image: url(../img/chevron-thin-right.svg);
-    // background-size: cover;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
 
     //newer browsers - masks: possiamo specificare il colore
-    background-color: var(--color-primary);
-    -webkit-mask-image: url(../img/chevron-thin-right.svg);
-    -webkit-mask-size: cover;
-    mask-image: url(../img/chevron-thin-right.svg);
-    mask-size: cover;
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover;
+      mask-image: url(../img/chevron-thin-right.svg);
+      mask-size: cover;
+      background-image: none;
+    }
   }
 }
 
@@ -69,6 +94,10 @@
     margin-right: auto; // calcola automaticamente il margine destra da aggiungere al div
   }
 
+  &__friends {
+    display: flex; //le foto una accanto all'altra
+  }
+
   &__photo {
     box-sizing: content-box; //senza questo i 3px del bordo dell'immagine  riducono la size dell'immagine perchè il default border-box li aggiunge riducendo l'immagine
     height: 4rem;
@@ -77,7 +106,7 @@
     border: 3px solid white;
 
     &:not(:last-child) {
-      margin-right: -1.5rem;
+      margin-right: -2rem;
     }
   }
 }
@@ -98,6 +127,12 @@
   margin-bottom: 3.5rem;
   position: relative; // imposta riferimento per " del ::before
   overflow: hidden; //rimuove la sporgenza del double quotation mark
+
+  // fino a 880px diminuisci padding e margine
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
 
   &__text {
     margin-bottom: 2rem;

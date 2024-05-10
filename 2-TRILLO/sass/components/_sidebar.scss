@@ -1,10 +1,28 @@
 // SIDE NAVIGATION
 
+.legal {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--color-grey-light-4);
+
+  // finoa 880px nasconde
+  @media only screen and (max-width: $bp-medium) {
+    display: none;
+  }
+}
+
 // ul
 .side-nav {
   font-size: 1.4rem;
   list-style: none;
   margin-top: 3.5rem;
+
+  // finoa 880px cambia la direzione del flex mettendo gli elementi in riga
+  @media only screen and (max-width: $bp-medium) {
+    display: flex;
+    margin: 0;
+  }
 
   // li
   &__item {
@@ -13,6 +31,16 @@
     // aggiungiamo una spaziatura tra gli <li> (tranne ultimo)
     &:not(:last-child) {
       margin-bottom: 0.5rem;
+
+      // finoa 880px rimuoviamo il margine bottom di ogni item del menu
+      @media only screen and (max-width: $bp-medium) {
+        margin-bottom: 0;
+      }
+    }
+
+    // finoa 880px ogni item del menu deve occupare 1/4 della riga
+    @media only screen and (max-width: $bp-medium) {
+      flex: 1; //occupa tutto lo spazio disponibile
     }
   }
 
@@ -57,6 +85,18 @@
     // centriamo verticalmente icona e testo del link facendo di questo ITEM un container FLEX e align-items: center;
     display: flex;
     align-items: center;
+
+    // finoa 880px centra gli items nel proprio contanitore
+    @media only screen and (max-width: $bp-medium) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    // fino a 717 metti icona sopra e scritta sotto: cambiamo la flex direction
+    @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+      padding: 1.5rem 0.5rem;
+    }
   }
 
   // svg dentro __link
@@ -65,12 +105,13 @@
     height: 1.75rem;
     margin-right: 2rem;
     fill: currentColor; // colore dell'elemento corrente (se specificato) o del padre (se non specificato): qui lo prende da &__link
-  }
-}
 
-.legal {
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 2.5rem;
-  color: var(--color-grey-light-4);
+    // fino a 717 icona più piccola
+    @media only screen and (max-width: $bp-small) {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: 0;
+      margin-bottom: 0.7rem;
+    }
+  }
 }

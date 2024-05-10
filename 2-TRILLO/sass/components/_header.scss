@@ -17,6 +17,12 @@
   justify-content: center; //allineati in orizzontale
   align-items: center; // verticalmente centrati
 
+  // a 500px la search è l'ultimo item del flex ed avendo header a wrap puà andare a capo (per farlo però a 500px dobbiamo farla crescere un pò !!!)
+  @media only screen and (max-width: $bp-smallest) {
+    order: 1;
+    flex: 0 0 100%; // no grow, no shrink, ma occupa 100% della  width dell'item
+  }
+
   &__input {
     font-family: inherit;
     font-size: inherit;

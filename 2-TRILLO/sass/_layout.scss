@@ -7,6 +7,13 @@
   box-shadow: var(--shadow-dark);
 
   min-height: 50rem; // occupa solo 50rem della viewport height
+
+  // finoa 1200px rimuove margin top e bottom e reimposta la max-width e width del container al 100%
+  @media only screen and (max-width: $bp-largest) {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 // contenitore del logo, search e user nav
@@ -19,11 +26,24 @@
   display: flex;
   justify-content: space-between; //allineati in orizzontale
   align-items: center; // verticalmente centrati
+
+  // a 500px diciamo che il flex può wrappare, così il search box che a questa width ha order = 1 (ultimo) può andare a capo
+  @media only screen and (max-width: $bp-smallest) {
+    flex-wrap: wrap;
+    height: 11rem;
+    align-content: space-around;
+    background-color: var(--color-grey-light-2);
+  }
 }
 
 // questo è il flex container che contiene la sidebar laterale(18% della riga) e la hotel-view centrale (82% della riga)
 .content {
   display: flex;
+
+  // finoa 880px cambia la direzione del clex in colonna, oltre è in riga
+  @media only screen and (max-width: $bp-medium) {
+    flex-direction: column;
+  }
 }
 
 .sidebar {
