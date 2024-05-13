@@ -43,14 +43,61 @@
               <use xlink:href="img/sprite.svg#icon-chat"></use>
             </svg>
             <span class="user-nav__notification">13</span>
+            <!-- qui mettiamo la lista delle chats : inizio -->
+            <div class="user-nav__user-menu user-nav__user-menu--chats">
+              <div class="user-nav__chat-item">
+                <img
+                  src="img/user-6.jpg"
+                  alt="Chat user 1"
+                  class="user-nav__chat-photo"
+                />
+                <p class="user-nav__chat-name">Rina Abigail</p>
+                <p class="user-nav__chat-time">Today at 07:30 AM</p>
+                <p class="user-nav__chat-message">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+              </div>
+              <div class="user-nav__chat-item">
+                <img
+                  src="img/user-5.jpg"
+                  alt="Chat user 2"
+                  class="user-nav__chat-photo"
+                />
+                <p class="user-nav__chat-name">Cris Petrucci</p>
+                <p class="user-nav__chat-time">Yesterday at 12:45 AM</p>
+                <p class="user-nav__chat-message">
+                  Lorem, che dolore stare qui a fare sta cavolo di lista .
+                </p>
+              </div>
+              <div class="user-nav__chat-item">
+                <img
+                  src="img/user-4.jpg"
+                  alt="Chat user 3"
+                  class="user-nav__chat-photo"
+                />
+                <p class="user-nav__chat-name">Delia Scala</p>
+                <p class="user-nav__chat-time">3 days ago at 04:15 PM</p>
+                <p class="user-nav__chat-message">
+                  Lorem, canis, gattis and uccellinis - mah, non so !!!.
+                </p>
+              </div>
+            </div>
+            <!-- qui mettiamo la lista delle chats : fine -->
           </div>
-          <div>
+          <div class="user-nav__user-name">
             <img
               src="img/user.jpg"
               alt="User photo"
               class="user-nav__user-photo"
             />
             <span>Jonas</span>
+            <!-- menu a comparla su utente : inizio -->
+            <div class="user-nav__user-menu">
+              <a href="#" class="user-nav__user-option">Bookings</a>
+              <a href="#" class="user-nav__user-option">Settings</a>
+              <a href="#" class="user-nav__user-option">Sign Out</a>
+            </div>
+            <!-- menu a comparla su utente : fine -->
           </div>
         </nav>
       </header>
@@ -101,20 +148,25 @@
                 alt="Photo of hotel 1"
                 class="gallery__photo"
               />
+              <span class="gallery__item__caption">caption 1</span>
             </figure>
+
             <figure class="gallery__item">
               <img
                 src="img/hotel-2.jpg"
                 alt="Photo of hotel 3"
                 class="gallery__photo"
               />
+              <span class="gallery__item__caption">caption 2</span>
             </figure>
+
             <figure class="gallery__item">
               <img
                 src="img/hotel-3.jpg"
                 alt="Photo of hotel 3"
                 class="gallery__photo"
               />
+              <span class="gallery__item__caption">caption 3</span>
             </figure>
           </div>
 
