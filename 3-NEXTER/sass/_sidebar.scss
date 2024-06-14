@@ -1,0 +1,74 @@
+.sidebar {
+  background-color: $color-primary;
+  grid-column: sidebar-start / sidebar-end;
+  grid-row: 1 / -1;
+
+  // centriamo il pulsante (hamburger menu) con flex
+  display: flex;
+  justify-content: center; //allineamento lungo main axis (orizzontale)
+
+  // fino a 1000px la sidebar è sulla prima riga ed occupa tutta la colonna
+  @media only screen and (max-width: $bp-large) {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    // hamburger menu
+    justify-content: flex-end; //spostalo a destra
+    align-items: center; // centra in verticale
+  }
+}
+
+// il container che abbraccia tutte e 3 le righe di cui il nav-btn è composto ci serve solo per il cursor pointer
+.btn-container {
+  display: block;
+  height: 7rem;
+  cursor: pointer;
+  margin-top: 4rem;
+
+  // fino a 1000px hamburger menu che è a destra aumenta margin top e dai spazio a destra
+  @media only screen and (max-width: $bp-large) {
+    margin-top: 7rem;
+    margin-right: 3rem;
+  }
+}
+// creiamo due rettangoli, il primo con il button vuoto .... (riga centrale)
+.nav-button {
+  border: none;
+  border-radius: 0;
+  background-color: white;
+  height: 2px;
+  width: 4.5rem;
+  display: block;
+
+  // ed il secondo identico al primo di cui sopra, ma con le pseudo classi before e after (ma per visualizzare il secondo usiamo i soliti content vuoto e display block);
+  // il before è la riga sopra il nav-button, l'after è la riga sotto il nav-button
+  &::before,
+  &::after {
+    background-color: white;
+    height: 2px;
+    width: 4.5rem;
+    content: "";
+    display: block;
+  }
+
+  // ora muoviamo il before sopra e l'after sotto
+  &::before {
+    transform: translateY(-1.5rem);
+  }
+  &::after {
+    transform: translateY(
+      1.3rem
+    ); //leggermente spostato perchè terza riga altrimenti troppo bassa!!!
+  }
+
+  // fino a 1000px hamburger menu e riduci spostameto tra righe
+  @media only screen and (max-width: $bp-large) {
+    &::before {
+      transform: translateY(-1.2rem);
+    }
+    &::after {
+      transform: translateY(
+        1rem
+      ); //leggermente spostato perchè terza riga altrimenti troppo bassa!!!
+    }
+  }
+}

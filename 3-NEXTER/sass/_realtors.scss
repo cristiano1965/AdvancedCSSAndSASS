@@ -1,0 +1,46 @@
+.realtors {
+  background-color: $color-secondary;
+  grid-column: col-start 7 / full-end;
+  padding: 3rem;
+
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-row-gap: 2rem;
+  justify-items: center;
+
+  // fino a 800px la griglia occupa tutte le colonne della riga (non solo le 2 esistenti)
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: min-content max-content;
+    grid-column-gap: 2rem;
+    grid-row-gap: 5vh; //spaziature righe cambierà cambiando l'altezza della viewport
+    align-items: center; //centra gli items verticalmente
+
+    // fino a 800px ripetiamo per 3 volte le 2 colonne che contengono immagine e scritta del realtor
+    @media only screen and (max-width: $bp-medium) {
+      grid-template-columns: repeat(3, min-content max-content);
+    }
+
+    // fino a 600px le due colonne icona e testo le mettiamo in colonna
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: min-content max-content;
+    }
+  }
+
+  &__img {
+    width: 7rem;
+    border-radius: 50%;
+    display: block;
+  }
+
+  &__sold {
+    text-transform: uppercase;
+    color: $color-grey-light-2;
+    margin-top: -3px;
+  }
+}

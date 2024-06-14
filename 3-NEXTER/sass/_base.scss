@@ -1,0 +1,82 @@
+// COLOR VARIABLES
+$color-primary: #c69963;
+$color-primary-dark: #b28451;
+
+$color-secondary: #101d2c;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #aaa;
+
+$color-grey-dark-1: #54483a;
+$color-grey-dark-2: #6d5d4b;
+
+// FONT VARIABLES
+$font-primary: "Nunito", sans-serif;
+$font-display: "Josefin Sans", sans-serif;
+
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; //1200px / 16px (default browser font-size) = 75
+$bp-large: 62.5em; //1000px / 16px (default browser font-size)  = 62.5
+$bp-medium: 50em; // 800px / 16px (default browser font-size)  = 50
+$bp-small: 37.5em; // 600px / 16px (default browser font-size)  = 37.5
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 10px/16px = 62.5% -> 1 rem = 10px
+
+  // fino a 1200px voglio font di 8px -> 8px/16px = 0.5 -> 50%
+  @media only screen and (max-width: $bp-largest) {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: $font-primary;
+  color: $color-grey-dark-2;
+  font-weight: 300;
+}
+
+.container {
+  display: grid;
+  /*
+    riga1: header -> deve occupare l'80% della viewport height
+    riga2: features -> inseriamo "min-content" oppure "auto" (che rappresenta il default quando per una riga non viene specificata l'altezza) in modo che l'altezza della riga si adatti automaticamente al suo contenuto
+    riga3: story -> deve essere il 40% della viewport width
+    riga4 (homes), riga5 (gallery), riga6 (footer) altezza automatica
+  */
+  grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+
+  // template ad 11 colonne: 1 sidebar amp fissa, 1col amp variabile, 8col centrali, 1col amp variabile
+  grid-template-columns:
+    [sidebar-start] 8rem [sidebar-end
+    full-start] minmax(6rem, 1fr)
+    [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+    [center-end]
+    minmax(6rem, 1fr) [full-end];
+
+  // fino a 1000px voglio che la sidebar sia la  prima  riga da 6 rem e non la prima colonna
+  @media only screen and (max-width: $bp-large) {
+    grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+
+    // rimuoviamo sidebar-start e sidebar-end
+    grid-template-columns:
+      [full-start] minmax(6rem, 1fr)
+      [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+      [center-end]
+      minmax(6rem, 1fr) [full-end];
+  }
+
+  // fino a 800px voglio aggiungere una nuova riga (cioè la terza riga) alla fine dell'header in cui spostiamo i realtors che si trovano normalmente e destra
+  // inoltre la seconda riga che contiene l'header (normalmente di 80vh) dovrà espandersi per tutta la viewport height sottraendo però lo spazio dei 6rem della sidebar che si trova in alto; in sostanza fino a 800px definiamo ampiezza solo per riga 1 e rga2, per le altre non diciamo nulla ed implicitamente avranno tutte "min-content"
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-rows: 6rem calc(100vh - 6rem);
+  }
+}

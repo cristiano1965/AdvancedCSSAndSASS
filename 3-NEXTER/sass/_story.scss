@@ -1,0 +1,82 @@
+.story {
+  &__pictures {
+    background-color: $color-primary;
+    grid-column: full-start / col-end 4;
+
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center; //le immagini vengono centrate in verticale rispetto alla riga
+    // usa immagine back con un gradiente(perchè l'immagine originale sarebbe verde!!!)  usando colore primario sfumandolo e rendendolo trasparente al 50%
+    background-image: linear-gradient(
+        rgba($color-primary, 0.5),
+        rgba($color-primary, 0.5)
+      ),
+      url(../img/back.jpg);
+    background-size: cover;
+
+    // fino a 800px il div occupa tutta la colonna
+    @media only screen and (max-width: $bp-medium) {
+      grid-column: 1 / -1;
+      padding: 6rem;
+    }
+  }
+
+  &__img--1 {
+    width: 100%;
+    grid-row: 2 / 6;
+    grid-column: 2 / 6;
+    box-shadow: 0 2rem 5rem rgba(#000, 0.3);
+
+    // fino a 800px l'immagine a sinistra occupa tutta la riga e solo le prime 5 colonne
+    @media only screen and (max-width: $bp-medium) {
+      grid-column: 1 / 5;
+      grid-row: 1 / -1;
+    }
+  }
+
+  &__img--2 {
+    width: 115%;
+    grid-row: 4 / 6;
+    grid-column: 4 / 7;
+    z-index: 20;
+    box-shadow: 0 2rem 5rem rgba(#000, 0.4);
+
+    // fino a 800px l'immagine a destra occupa tutta la riga
+    @media only screen and (max-width: $bp-medium) {
+      grid-row: 1 / -1;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    background-color: $color-grey-light-1;
+    grid-column: col-start 5 / full-end;
+
+    padding: 6rem 8vw;
+
+    // soluzione 1 per centrare gli elementi nel div con il flex
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: center; //centra in verticale
+    align-items: flex-start; //altrimenti ogni elemento occupa in orizzontale tutto lo spazio disponibile
+    */
+
+    // soluzione 2 per centrare gli elementi nel div con una nuova grid
+    display: grid;
+    align-content: center;
+    justify-items: start;
+
+    // fino a 800px il div occupa tutta la colonna e riga 5 (in tal modo viene posizionata prima delle pictures)
+    @media only screen and (max-width: $bp-medium) {
+      grid-column: 1 / -1;
+      grid-row: 5 / 6;
+    }
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    font-style: italic;
+  }
+}

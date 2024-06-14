@@ -1,0 +1,37 @@
+.features {
+  //background-color: $color-grey-light-2;
+  grid-column: center-start / center-end;
+
+  margin: 15rem 0;
+
+  //creiamo una sottogriglia di 3 colonne e due righe con un gap di 6rem sia per le righe che per le colonne
+  display: grid;
+  //grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(25rem, 1fr)
+  ); //nr colonne automatico, ampiezza automatica ma minima 25rem
+  grid-template-rows: auto auto;
+  grid-gap: 6rem;
+  align-items: start;
+}
+
+// ogni feature è una sottogriglia di 2 colonne e due righe, la prima colonna (con icona) si estende per due righe e la seconda colonna contiene header a riga1 e il paragrafo a riga 2
+.feature {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2.5rem;
+
+  &__icon {
+    fill: $color-primary;
+    width: 4.5rem;
+    height: 2.5rem;
+    grid-row: 1 / span 2; //la colonna con icona occupa 2 righe
+    transform: translateY(-0.5rem); //sposta icona leggermente più in alto
+  }
+
+  &__text {
+    font-size: 1.7rem;
+  }
+}
